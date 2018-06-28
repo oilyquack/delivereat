@@ -11,7 +11,7 @@ class App extends React.Component {
 
   componentDidMount() {
     console.log("HI");
-    fetch("//localhost:8080/api")
+    fetch("//localhost:8080/menu")
       .then(response => response.json())
       .then(json => {
         console.log(json);

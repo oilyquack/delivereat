@@ -38,8 +38,16 @@ app.get("/", function(req, res) {
   res.render("index");
 });
 
-app.get("/api", function(req, res) {
+app.get("/menu", function(req, res) {
   res.json(menu);
+});
+
+app.get("/menu/:menuId", function(req, res) {
+  if (menu[req.params.menuId]) {
+    res.json(menu[req.params.menuId]);
+  } else {
+    res.status(404).json({ error: "Menu item not found" });
+  }
 });
 
 app.listen(8080, function() {
