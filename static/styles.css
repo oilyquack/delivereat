@@ -1,3 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+.app__header {
+  display: flex;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgb(219, 0, 0);
+  color: rgb(250, 199, 199);
+  font-size: 40px;
 }

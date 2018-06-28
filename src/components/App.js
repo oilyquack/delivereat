@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "./Header";
 
 class App extends React.Component {
   constructor() {
@@ -10,11 +11,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log("HI");
-    fetch("//localhost:8080/menu")
+    fetch("/menu")
       .then(response => response.json())
       .then(json => {
-        console.log(json);
         this.setState({
           menu: json
         });
@@ -25,14 +24,14 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Delivereat app</h1>
+        <Header />
         <h2>Menu</h2>
 
         {Object.values(this.state.menu).map(item => {
           return (
             <div>
               <p>{item.name}</p>
-              <p>£{item.price}</p>
+              <p>£{item.price.toFixed(2)}</p>
             </div>
           );
         })}
