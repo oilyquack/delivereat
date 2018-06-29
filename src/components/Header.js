@@ -6,7 +6,7 @@ class Header extends React.Component {
       <div className="app__header">
         <header>
           <strong>DELIVER</strong>
-          <span className="eat italic">eat</span>
+          <span className="eat">eat</span>
         </header>
       </div>
     );
