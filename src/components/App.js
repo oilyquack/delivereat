@@ -17,6 +17,8 @@ class App extends React.Component {
 
     this.receiver = this.receiver.bind(this);
     this.receiverAmount = this.receiverAmount.bind(this);
+    this.receiverDelete = this.receiverDelete.bind(this);
+    // this.hideOrder = this.hideOrder.bind(this);
   }
 
   componentDidMount() {
@@ -51,6 +53,25 @@ class App extends React.Component {
     });
   }
 
+  receiverDelete(id) {
+    let prevOrder = this.state.order;
+    let newOrder = Object.assign({}, prevOrder);
+    delete newOrder[id];
+    this.setState({
+      order: newOrder
+      total: 
+    });
+  }
+
+  // hideOrder() {
+  //   const orderToHide = document.getElementById("#app__menu__order");
+  //   if (orderToHide.style.display === "none") {
+  //     orderToHide.style.display = "flex";
+  //   } else {
+  //     orderToHide.style.display = "none";
+  //   }
+  // }
+
   render() {
     return (
       <div>
@@ -72,8 +93,13 @@ class App extends React.Component {
           </form>
         </div>
         <div className="app__order">
-          <h2>Order</h2>
-          <div className="app__menu__order">
+          <h2>
+            Order{" "}
+            <span className="hide" onClick={this.hideOrder}>
+              🤫
+            </span>
+          </h2>
+          <div className="app__menu__order" id="app__menu__order">
             {Object.entries(this.state.order).map(([id, quantity]) => {
               return (
                 <Order
@@ -82,6 +108,7 @@ class App extends React.Component {
                   menuPrice={this.state.menu[id].price}
                   menuItemId={id}
                   itemQuantity={quantity}
+                  receiverDelete={this.receiverDelete}
                 />
               );
             })}
