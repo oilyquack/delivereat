@@ -73,25 +73,29 @@ class App extends React.Component {
         </div>
         <div className="app__order">
           <h2>Order</h2>
-          {Object.entries(this.state.order).map(([id, quantity]) => {
-            return (
-              <Order
-                key={id}
-                menuName={this.state.menu[id].name}
-                menuPrice={this.state.menu[id].price}
-                menuItemId={id}
-                itemQuantity={quantity}
-              />
-            );
-          })}
-          <p>Subtotal: £{(+this.state.total).toFixed(2)}</p>
-          <p>Delivery Fee: £5</p>
-          <p>
-            Total: £{(
-              +this.state.total.toFixed(2) +
-              +this.state.deliveryCharge.toFixed(2)
-            ).toFixed(2)}
-          </p>
+          <div className="app__menu__order">
+            {Object.entries(this.state.order).map(([id, quantity]) => {
+              return (
+                <Order
+                  key={id}
+                  menuName={this.state.menu[id].name}
+                  menuPrice={this.state.menu[id].price}
+                  menuItemId={id}
+                  itemQuantity={quantity}
+                />
+              );
+            })}
+          </div>
+          <div className="app__menu__order__subtotal">
+            <p>Subtotal: £{(+this.state.total).toFixed(2)}</p>
+            <p>Delivery Fee: £5</p>
+            <p>
+              Total: £{(
+                +this.state.total.toFixed(2) +
+                +this.state.deliveryCharge.toFixed(2)
+              ).toFixed(2)}
+            </p>
+          </div>
         </div>
       </div>
     );

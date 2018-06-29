@@ -64,6 +64,8 @@ body {
 }
 
 .app__order {
+  display: flex;
+  flex-direction: column;
   background: rgb(211, 148, 200);
   text-align: left;
   padding: 10px;
@@ -72,15 +74,23 @@ body {
 
 .app__menu__order {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: space-evenly;
   background: rgb(244, 207, 252);
+  border: black 1px solid;
   margin: 5px;
   padding: 10px;
-  border: black 1px solid;
 }
 
 .app__menu__order::nth-child(odd) {
   background: rgb(200, 168, 207);
+}
+
+.app__menu__order__subtotal {
+  background: rgb(244, 207, 252);
+  border: black 1px solid;
+  margin: 5px;
+  padding: 10px;
 }
 
 /* Buttons */

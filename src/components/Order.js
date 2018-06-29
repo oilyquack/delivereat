@@ -7,8 +7,8 @@ class Order extends React.Component {
 
   render() {
     return (
-      <div className="app__menu__order" id={this.props.item}>
-        <p>Meal: {this.props.menuName}</p>
+      <div id={this.props.item}>
+        <p>{this.props.menuName}</p>
         <p>Quantity: {this.props.itemQuantity}</p>
         <p>
           Price: £
