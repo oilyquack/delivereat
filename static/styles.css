@@ -18,3 +18,73 @@ body {
   color: rgb(250, 199, 199);
   font-size: 40px;
 }
+
+.eat {
+  background-image: linear-gradient(
+    100deg,
+    rgb(219, 0, 0) 0%,
+    rgb(255, 111, 111) 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 0%;
+  transition: background-size 0.35s ease-in;
+}
+
+.eat:hover {
+  background-size: 100%;
+}
+
+.app__menu {
+  background: rgb(255, 240, 240);
+  text-align: left;
+  padding: 2px 10px;
+  margin: 0;
+}
+
+.app__menu__item {
+  background: rgb(230, 183, 183);
+  margin: 5px;
+  padding: 10px;
+  border: black 1px solid;
+}
+
+.app__menu__item:nth-child(odd) {
+  background: rgb(206, 162, 162);
+}
+
+.app__menu__item__price {
+  margin: 0;
+  font-size: 25px;
+}
+
+.app__menu__place-order {
+  display: flex;
+  /* Why won't this go to the right?! */
+  justify-content: right;
+}
+
+.app__order {
+  background: rgb(211, 148, 200);
+  text-align: left;
+  padding: 10px;
+  margin: 0;
+}
+
+/* Buttons */
+.add-to-order-button {
+  border-radius: 15%;
+  font-size: 20px;
+  height: 30px;
+  background: rgb(211, 211, 211);
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+.add-to-order-button:hover {
+  background: rgb(160, 160, 160);
+}
+
+.add-to-order-button:active {
+  background: rgb(78, 78, 78);
+  color: rgb(211, 211, 211);
+}

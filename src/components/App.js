@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import Order from "./Order";
 
 class App extends React.Component {
   constructor() {
@@ -8,6 +9,12 @@ class App extends React.Component {
     this.state = {
       menu: {}
     };
+  }
+
+  receiver(data) {
+    this.setState({
+      menu: json
+    });
   }
 
   componentDidMount() {
@@ -25,16 +32,27 @@ class App extends React.Component {
     return (
       <div>
         <Header />
-        <h2>Menu</h2>
 
-        {Object.values(this.state.menu).map(item => {
-          return (
-            <div>
-              <p>{item.name}</p>
-              <p>£{item.price.toFixed(2)}</p>
-            </div>
-          );
-        })}
+        <div className="app__menu">
+          <h2>Menu</h2>
+          {Object.values(this.state.menu).map(item => {
+            return (
+              <div className="app__menu__item">
+                <p>
+                  <strong>{item.name}</strong>
+                </p>
+                <p>{item.description}</p>
+                <div className="app__menu__place-order">
+                  <p className="app__menu__item__price">
+                    £{item.price.toFixed(2)}
+                  </p>
+                  <button className="add-to-order-button">✚</button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <Order />
       </div>
     );
   }

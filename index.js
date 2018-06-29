@@ -10,26 +10,34 @@ const menu = {
   1: {
     id: 1,
     name: "Plantain Tacos",
+    description:
+      "Beautiful crispy plantain in smokey chipotle sauce served in a soft white flour tortilla with feta and corriander.",
     price: 6
   },
   2: {
     id: 2,
     name: "Black Bean Quesadillas",
+    description:
+      "Black beans fried between two corn tortillas with cheddar cheese.",
     price: 5
   },
   3: {
     id: 3,
     name: "Guacamole",
+    description:
+      "Chunky avocado with tomato, onion, corriander, lime and salt. The good stuff, not the puree in the tub at the back of your fridge.",
     price: 2.5
   },
   4: {
     id: 4,
     name: "Frijoles",
+    description: "Oh. My. God. Creamy beans with feta and chili. Get on board.",
     price: 3
   },
   5: {
     id: 5,
     name: "Chipotle Salsa",
+    description: "Can you handle this? Tomatoey salsa to test your metal.",
     price: 3
   }
 };

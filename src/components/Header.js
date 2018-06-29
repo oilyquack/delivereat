@@ -3,10 +3,10 @@ import React from "react";
 class Header extends React.Component {
   render() {
     return (
-      <div class="app__header">
+      <div className="app__header">
         <header>
           <strong>DELIVER</strong>
-          <i>eat</i>
+          <span className="eat italic">eat</span>
         </header>
       </div>
     );
