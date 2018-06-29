@@ -30,7 +30,7 @@ body {
   transition: background-size 0.35s ease-in;
 }
 
-.eat:hover {
+.app__header:hover .eat {
   background-size: 100%;
 }
 
@@ -68,6 +68,19 @@ body {
   text-align: left;
   padding: 10px;
   margin: 0;
+}
+
+.app__menu__order {
+  display: flex;
+  justify-content: space-around;
+  background: rgb(244, 207, 252);
+  margin: 5px;
+  padding: 10px;
+  border: black 1px solid;
+}
+
+.app__menu__order::nth-child(odd) {
+  background: rgb(200, 168, 207);
 }
 
 /* Buttons */

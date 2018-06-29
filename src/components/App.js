@@ -9,10 +9,14 @@ class App extends React.Component {
 
     this.state = {
       menu: {},
-      order: {}
+      order: {},
+      totalArray: [],
+      total: 0,
+      deliveryCharge: 5.0
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.receiver = this.receiver.bind(this);
+    this.receiverAmount = this.receiverAmount.bind(this);
   }
 
   componentDidMount() {
@@ -26,7 +30,7 @@ class App extends React.Component {
       .catch(error => alert("Sorry, I coulnd't find the menu"));
   }
 
-  handleSubmit(id) {
+  receiver(id) {
     let prevOrder = this.state.order;
     let newOrder = Object.assign({}, prevOrder, {
       [id]: !this.state.order[id] ? 1 : this.state.order[id] + 1
@@ -34,7 +38,17 @@ class App extends React.Component {
     this.setState({
       order: newOrder
     });
-    console.log(newOrder);
+  }
+
+  receiverAmount(value) {
+    let clone = this.state.totalArray;
+    clone.push(value);
+    let subtotal = clone.reduce(function(acc, price) {
+      return acc + price;
+    }, 0);
+    this.setState({
+      total: subtotal
+    });
   }
 
   render() {
@@ -50,13 +64,35 @@ class App extends React.Component {
                 <Menu
                   key={item.id}
                   item={item}
-                  handleSubmit={this.handleSubmit}
+                  receiver={this.receiver}
+                  receiverAmount={this.receiverAmount}
                 />
               );
             })}
           </form>
         </div>
-        <Order />
+        <div className="app__order">
+          <h2>Order</h2>
+          {Object.entries(this.state.order).map(([id, quantity]) => {
+            return (
+              <Order
+                key={id}
+                menuName={this.state.menu[id].name}
+                menuPrice={this.state.menu[id].price}
+                menuItemId={id}
+                itemQuantity={quantity}
+              />
+            );
+          })}
+          <p>Subtotal: £{(+this.state.total).toFixed(2)}</p>
+          <p>Delivery Fee: £5</p>
+          <p>
+            Total: £{(
+              +this.state.total.toFixed(2) +
+              +this.state.deliveryCharge.toFixed(2)
+            ).toFixed(2)}
+          </p>
+        </div>
       </div>
     );
   }
