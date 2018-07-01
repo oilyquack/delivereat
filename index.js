@@ -42,6 +42,10 @@ const menu = {
   }
 };
 
+const orders = {};
+
+const orderId = 0;
+
 app.get("/", function(req, res) {
   res.render("index");
 });
@@ -56,6 +60,11 @@ app.get("/menu/:menuId", function(req, res) {
   } else {
     res.status(404).json({ error: "Menu item not found" });
   }
+});
+
+app.post("/order", function(req, res) {
+  orders[orderId++] = req.body;
+  res.json({ orderId });
 });
 
 app.listen(8080, function() {

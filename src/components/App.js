@@ -17,6 +17,7 @@ class App extends React.Component {
 
     this.receiver = this.receiver.bind(this);
     this.receiverAmount = this.receiverAmount.bind(this);
+    this.sendOrderToAdmin = this.sendOrderToAdmin.bind(this);
     // this.receiverDelete = this.receiverDelete.bind(this);
     // this.hideOrder = this.hideOrder.bind(this);
   }
@@ -86,6 +87,17 @@ class App extends React.Component {
 
   sendOrderToAdmin(event) {
     event.preventDefault();
+
+    fetch("/order", {
+      method: "post",
+      body: JSON.stringify(this.state.order)
+    })
+      .then(function(response) {
+        alert(
+          "Your order has been recieved. The restaurant will get back to you soon!"
+        );
+      })
+      .catch(error => alert("Sorry, we couldn't process your oder."));
   }
 
   render() {
@@ -139,7 +151,12 @@ class App extends React.Component {
               ).toFixed(2)}
             </p>
           </div>
-          <button onSubmit={this.sendOrderToAdmin}>Feed me</button>
+          <button
+            className="add-to-order-button"
+            onClick={this.sendOrderToAdmin}
+          >
+            Feed me
+          </button>
         </div>
       </div>
     );
