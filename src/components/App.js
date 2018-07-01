@@ -98,6 +98,12 @@ class App extends React.Component {
         );
       })
       .catch(error => alert("Sorry, we couldn't process your oder."));
+
+    this.setState({
+      order: {},
+      totalArray: [],
+      total: 0
+    });
   }
 
   render() {

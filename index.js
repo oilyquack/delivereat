@@ -67,6 +67,10 @@ app.post("/order", function(req, res) {
   res.json({ orderId });
 });
 
+app.get("/admin", function(req, res) {
+  res.json(orders[orderId]);
+});
+
 app.listen(8080, function() {
   console.log("Listening on port 8080");
 });
