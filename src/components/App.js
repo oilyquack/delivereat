@@ -84,6 +84,10 @@ class App extends React.Component {
   //   }
   // }
 
+  sendOrderToAdmin(event) {
+    event.preventDefault();
+  }
+
   render() {
     return (
       <div>
@@ -135,7 +139,7 @@ class App extends React.Component {
               ).toFixed(2)}
             </p>
           </div>
-          <button>Feed me</button>
+          <button onSubmit={this.sendOrderToAdmin}>Feed me</button>
         </div>
       </div>
     );

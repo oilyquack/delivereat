@@ -16,7 +16,7 @@ class Order extends React.Component {
       <div id={this.props.item}>
         <p>{this.props.menuName}</p>
         <p>Quantity: {this.props.itemQuantity}</p>
-        <span /*onClick={this.deleteItem}*/ className="delete-item">🗑</span>
+        <span /* onClick={this.deleteItem}*/ className="delete-item">🗑</span>
         <p>
           Price: £
           <span id="item-price">
