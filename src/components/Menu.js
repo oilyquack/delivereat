@@ -11,8 +11,6 @@ class Menu extends React.Component {
     event.preventDefault();
 
     this.props.receiver(this.props.item.id);
-
-    this.props.receiverAmount(this.props.item.price);
   }
 
   render() {

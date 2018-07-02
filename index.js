@@ -37,7 +37,7 @@ const menu = {
   5: {
     id: 5,
     name: "Chipotle Salsa",
-    description: "Can you handle this? Tomatoey salsa to test your metal.",
+    description: "Can you handle this? Tomatoey salsa to test your mettle.",
     price: 3
   }
 };
@@ -63,7 +63,7 @@ app.get("/menu/:menuId", function(req, res) {
 });
 
 app.post("/order", function(req, res) {
-  orders = Object.assign({}, orders, { [orderId++]: req.body });
+  orders = Object.assign({}, orders, { ["Order ID " + orderId++]: req.body });
   res.json({ orderId });
 });
 

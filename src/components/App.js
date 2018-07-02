@@ -10,15 +10,14 @@ class App extends React.Component {
     this.state = {
       menu: {},
       order: {},
-      totalArray: [],
       total: 0,
-      deliveryCharge: 5.0
+      deliveryCharge: 5
     };
 
     this.receiver = this.receiver.bind(this);
-    this.receiverAmount = this.receiverAmount.bind(this);
     this.sendOrderToAdmin = this.sendOrderToAdmin.bind(this);
-    // this.receiverDelete = this.receiverDelete.bind(this);
+    this.calculateTotal = this.calculateTotal.bind(this);
+    this.receiverDelete = this.receiverDelete.bind(this);
     // this.hideOrder = this.hideOrder.bind(this);
   }
 
@@ -43,38 +42,15 @@ class App extends React.Component {
     });
   }
 
-  receiverAmount(value) {
-    let clone = this.state.totalArray;
-    clone.push(value);
-    let subtotal = clone.reduce(function(acc, price) {
-      return acc + price;
-    }, 0);
+  receiverDelete(id) {
+    let prevOrder = this.state.order;
+    let newOrder = Object.assign({}, prevOrder);
+    delete newOrder[id];
+
     this.setState({
-      total: subtotal
+      order: newOrder
     });
   }
-
-  // receiverDelete(id) {
-  //   let prevOrder = this.state.order;
-  //   let newOrder = Object.assign({}, prevOrder);
-  //   delete newOrder[id];
-
-  //   let newArray = this.state.totalArray;
-  //   let newSortedArray = newArray.sort();
-  //   let itemIndex = this.state.totalArray.indexOf(this.state.menu[id].price);
-  //   let quantity = this.state.order[id];
-  //   let newSlicedArray = newSortedArray.slice(itemIndex, quantity);
-
-  //   let subtotal = newArray.reduce(function(acc, price) {
-  //     return acc + price;
-  //   }, 0);
-
-  //   this.setState({
-  //     order: newOrder,
-  //     totalArray: newSlicedArray,
-  //     total: subtotal
-  //   });
-  // }
 
   // hideOrder() {
   //   const orderToHide = document.getElementById("#app__menu__order");
@@ -103,13 +79,21 @@ class App extends React.Component {
       .catch(error => alert("Sorry, we couldn't process your oder."));
 
     this.setState({
-      order: {},
-      totalArray: [],
-      total: 0
+      order: {}
     });
   }
 
+  calculateTotal(menu, order) {
+    const total = Object.entries(order)
+      .map(([id, quantity]) => menu[id].price * quantity)
+      .reduce((acc, value) => acc + value, 0);
+
+    return total;
+  }
+
   render() {
+    const total = this.calculateTotal(this.state.menu, this.state.order);
+    console.log(this.state.order);
     return (
       <div>
         <Header />
@@ -119,12 +103,7 @@ class App extends React.Component {
           <form>
             {Object.values(this.state.menu).map(item => {
               return (
-                <Menu
-                  key={item.id}
-                  item={item}
-                  receiver={this.receiver}
-                  receiverAmount={this.receiverAmount}
-                />
+                <Menu key={item.id} item={item} receiver={this.receiver} />
               );
             })}
           </form>
@@ -145,20 +124,15 @@ class App extends React.Component {
                   menuPrice={this.state.menu[id].price}
                   menuItemId={id}
                   itemQuantity={quantity}
-                  /* receiverDelete={this.receiverDelete} */
+                  receiverDelete={this.receiverDelete}
                 />
               );
             })}
           </div>
           <div className="app__menu__order__subtotal">
-            <p>Subtotal: £{(+this.state.total).toFixed(2)}</p>
+            <p>Subtotal: £{total}</p>
             <p>Delivery Fee: £5.00</p>
-            <p>
-              Total: £{(
-                +this.state.total.toFixed(2) +
-                +this.state.deliveryCharge.toFixed(2)
-              ).toFixed(2)}
-            </p>
+            <p>Total: £{(total + this.state.deliveryCharge).toFixed(2)}</p>
           </div>
           <button
             className="add-to-order-button"
