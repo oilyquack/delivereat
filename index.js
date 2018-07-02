@@ -42,9 +42,9 @@ const menu = {
   }
 };
 
-const orders = {};
+let orders = {};
 
-const orderId = 0;
+let orderId = 0;
 
 app.get("/", function(req, res) {
   res.render("index");
@@ -63,12 +63,12 @@ app.get("/menu/:menuId", function(req, res) {
 });
 
 app.post("/order", function(req, res) {
-  orders[orderId++] = req.body;
+  orders = Object.assign({}, orders, { [orderId++]: req.body });
   res.json({ orderId });
 });
 
 app.get("/admin", function(req, res) {
-  res.json(orders[orderId]);
+  res.json(orders);
 });
 
 app.listen(8080, function() {

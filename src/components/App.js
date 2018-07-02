@@ -90,13 +90,16 @@ class App extends React.Component {
 
     fetch("/order", {
       method: "post",
-      body: JSON.stringify(this.state.order)
+      body: JSON.stringify(this.state.order),
+      headers: {
+        "Content-Type": "application/json"
+      }
     })
-      .then(function(response) {
+      .then(response =>
         alert(
           "Your order has been recieved. The restaurant will get back to you soon!"
-        );
-      })
+        )
+      )
       .catch(error => alert("Sorry, we couldn't process your oder."));
 
     this.setState({
