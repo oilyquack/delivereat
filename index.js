@@ -39,6 +39,12 @@ const menu = {
     name: "Chipotle Salsa",
     description: "Can you handle this? Tomatoey salsa to test your mettle.",
     price: 3
+  },
+  6: {
+    id: 6,
+    name: "Tequila Cheesecake",
+    description: "Don't pretend you don't want this.",
+    price: 5
   }
 };
 

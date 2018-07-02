@@ -8,6 +8,11 @@ body {
   font-family: Verdana, Geneva, sans-serif;
 }
 
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
 .app__header {
   display: flex;
   justify-content: center;
@@ -118,4 +123,18 @@ body {
 
 .delete-item {
   cursor: pointer;
+}
+
+@media (min-width: 760px) {
+  .app {
+    flex-direction: row;
+  }
+
+  .app__menu {
+    flex: 2;
+  }
+
+  .app__order {
+    flex: 1;
+  }
 }

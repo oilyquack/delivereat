@@ -18,7 +18,7 @@ class App extends React.Component {
     this.sendOrderToAdmin = this.sendOrderToAdmin.bind(this);
     this.calculateTotal = this.calculateTotal.bind(this);
     this.receiverDelete = this.receiverDelete.bind(this);
-    // this.hideOrder = this.hideOrder.bind(this);
+    this.hideOrder = this.hideOrder.bind(this);
   }
 
   componentDidMount() {
@@ -52,14 +52,14 @@ class App extends React.Component {
     });
   }
 
-  // hideOrder() {
-  //   const orderToHide = document.getElementById("#app__menu__order");
-  //   if (orderToHide.style.display === "none") {
-  //     orderToHide.style.display = "flex";
-  //   } else {
-  //     orderToHide.style.display = "none";
-  //   }
-  // }
+  hideOrder() {
+    const orderToHide = document.getElementById(".app__menu__order");
+    if (orderToHide.style.display === "none") {
+      orderToHide.style.display = "flex";
+    } else {
+      orderToHide.style.display = "none";
+    }
+  }
 
   sendOrderToAdmin(event) {
     event.preventDefault();
@@ -97,49 +97,50 @@ class App extends React.Component {
     return (
       <div>
         <Header />
-
-        <div className="app__menu">
-          <h2>Menu</h2>
-          <form>
-            {Object.values(this.state.menu).map(item => {
-              return (
-                <Menu key={item.id} item={item} receiver={this.receiver} />
-              );
-            })}
-          </form>
-        </div>
-        <div className="app__order">
-          <h2>
-            Order{" "}
-            <span className="hide" onClick={this.hideOrder}>
-              🤫
-            </span>
-          </h2>
-          <div className="app__menu__order" id="app__menu__order">
-            {Object.entries(this.state.order).map(([id, quantity]) => {
-              return (
-                <Order
-                  key={id}
-                  menuName={this.state.menu[id].name}
-                  menuPrice={this.state.menu[id].price}
-                  menuItemId={id}
-                  itemQuantity={quantity}
-                  receiverDelete={this.receiverDelete}
-                />
-              );
-            })}
+        <div className="app">
+          <div className="app__menu">
+            <h2>Menu</h2>
+            <form>
+              {Object.values(this.state.menu).map(item => {
+                return (
+                  <Menu key={item.id} item={item} receiver={this.receiver} />
+                );
+              })}
+            </form>
           </div>
-          <div className="app__menu__order__subtotal">
-            <p>Subtotal: £{total}</p>
-            <p>Delivery Fee: £5.00</p>
-            <p>Total: £{(total + this.state.deliveryCharge).toFixed(2)}</p>
+          <div className="app__order">
+            <h2>
+              Order{" "}
+              <span className="hide" onClick={this.hideOrder}>
+                🤫
+              </span>
+            </h2>
+            <div className="app__menu__order">
+              {Object.entries(this.state.order).map(([id, quantity]) => {
+                return (
+                  <Order
+                    key={id}
+                    menuName={this.state.menu[id].name}
+                    menuPrice={this.state.menu[id].price}
+                    menuItemId={id}
+                    itemQuantity={quantity}
+                    receiverDelete={this.receiverDelete}
+                  />
+                );
+              })}
+            </div>
+            <div className="app__menu__order__subtotal">
+              <p>Subtotal: £{total}</p>
+              <p>Delivery Fee: £5.00</p>
+              <p>Total: £{(total + this.state.deliveryCharge).toFixed(2)}</p>
+            </div>
+            <button
+              className="add-to-order-button"
+              onClick={this.sendOrderToAdmin}
+            >
+              Feed me
+            </button>
           </div>
-          <button
-            className="add-to-order-button"
-            onClick={this.sendOrderToAdmin}
-          >
-            Feed me
-          </button>
         </div>
       </div>
     );
