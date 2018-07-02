@@ -19,6 +19,7 @@ class App extends React.Component {
     this.calculateTotal = this.calculateTotal.bind(this);
     this.receiverDelete = this.receiverDelete.bind(this);
     this.hideOrder = this.hideOrder.bind(this);
+    this.orderClickHandler = this.orderClickHandler.bind(this);
   }
 
   componentDidMount() {
@@ -53,7 +54,7 @@ class App extends React.Component {
   }
 
   hideOrder() {
-    const orderToHide = document.getElementById(".app__menu__order");
+    const orderToHide = document.querySelector(".app__menu__order");
     if (orderToHide.style.display === "none") {
       orderToHide.style.display = "flex";
     } else {
@@ -61,9 +62,15 @@ class App extends React.Component {
     }
   }
 
-  sendOrderToAdmin(event) {
-    event.preventDefault();
+  calculateTotal(menu, order) {
+    const total = Object.entries(order)
+      .map(([id, quantity]) => menu[id].price * quantity)
+      .reduce((acc, value) => acc + value, 0);
 
+    return total;
+  }
+
+  sendOrderToAdmin() {
     fetch("/order", {
       method: "post",
       body: JSON.stringify(this.state.order),
@@ -83,17 +90,15 @@ class App extends React.Component {
     });
   }
 
-  calculateTotal(menu, order) {
-    const total = Object.entries(order)
-      .map(([id, quantity]) => menu[id].price * quantity)
-      .reduce((acc, value) => acc + value, 0);
+  orderClickHandler(event) {
+    event.preventDefault();
 
-    return total;
+    this.addToOrderHistory(this.state.orderHistory, this.state.order);
+    this.sendOrderToAdmin();
   }
 
   render() {
     const total = this.calculateTotal(this.state.menu, this.state.order);
-    console.log(this.state.order);
     return (
       <div>
         <Header />
@@ -136,10 +141,11 @@ class App extends React.Component {
             </div>
             <button
               className="add-to-order-button"
-              onClick={this.sendOrderToAdmin}
+              onClick={this.orderClickHandler}
             >
               Feed me
             </button>
+            <h2>Order History</h2>
           </div>
         </div>
       </div>

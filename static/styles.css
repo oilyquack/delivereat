@@ -98,6 +98,16 @@ body {
   padding: 10px;
 }
 
+.app__order__history {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background: rgb(180, 217, 235);
+  border: black 1px solid;
+  margin: 5px;
+  padding: 10px;
+}
+
 /* Buttons */
 .add-to-order-button {
   border-radius: 15%;
@@ -136,5 +146,19 @@ body {
 
   .app__order {
     flex: 1;
+  }
+}
+
+@media (min-width: 1200px) {
+  .app__menu {
+    flex: 3;
+
+    font-size: 20px;
+  }
+
+  .app__order {
+    flex: 1;
+
+    font-size: 18px;
   }
 }
